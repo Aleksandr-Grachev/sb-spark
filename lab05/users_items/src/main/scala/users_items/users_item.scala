@@ -86,7 +86,7 @@ object users_items {
 
   def readVisits(spark: SparkSession, path: String): DataFrame =
     spark.read
-      .parquet(path)
+      .json(path)
       .select(
         col("uid"),
         col("item_id"),
@@ -176,5 +176,5 @@ object users_items {
     cols.foldLeft(df) { (acc, c) =>
       if (acc.columns.contains(c)) acc else acc.withColumn(c, lit(0))
     }
-    
+
 }
