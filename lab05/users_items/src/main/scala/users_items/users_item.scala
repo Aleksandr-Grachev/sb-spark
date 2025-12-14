@@ -57,7 +57,7 @@ object users_items {
     // TЗ: самые последние данные датированные данные
     val maxDate =
       eventsDf
-        .select(max(col("event_time")).as("ts"))
+        .select(max(col("timestamp")).as("ts"))
         .as[Long]
         .collect()
         .headOption
@@ -79,7 +79,10 @@ object users_items {
       .mode("overwrite")
       .parquet(s"$outputDir/$dateStr")
 
+
     spark.stop()
+
+    println("The users_items application is done")
   }
 
   // ---------- helpers ----------
@@ -90,7 +93,7 @@ object users_items {
       .select(
         col("uid"),
         col("item_id"),
-        col("event_time").cast(LongType)
+        col("timestamp").cast(LongType)
       )
 
   /** Названия полей item_id должны быть нормализованы
