@@ -1,0 +1,19 @@
+# Память
+-Xms2G
+-Xmx4G
+-XX:ReservedCodeCacheSize=512m
+
+# G1 Garbage Collector (оптимально для JVM17)
+-XX:+UseG1GC
+-XX:MaxGCPauseMillis=200
+-XX:+ParallelRefProcEnabled
+-XX:+AlwaysPreTouch
+
+# Улучшение JIT и компиляции
+-XX:+TieredCompilation
+-XX:TieredStopAtLevel=1
+-XX:+UseStringDeduplication
+
+# Опционально для Scala/SBT
+-Dsbt.supershell=false
+-Dfile.encoding=UTF-8
